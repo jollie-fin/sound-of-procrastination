@@ -60,7 +60,7 @@ func pumKaTchaKa(tempo libs.Signalstream) libs.Audiostream {
 	slimtriggerbassdrum1,slimtriggerbassdrum2 := libs.Split(drums[0])
 	triggerbassdrum	:= libs.DiracToImpulsion(slimtriggerbassdrum1,triggerwidth)
 	velocitybassdrum := drumsvelocity[0]
-	enveloppebassdrum := libs.Adsr(
+	envelopebassdrum := libs.Adsr(
 		triggerbassdrum,
 		10*time.Millisecond, 40*time.Millisecond,
 		.1, 300*time.Millisecond)
@@ -69,7 +69,7 @@ func pumKaTchaKa(tempo libs.Signalstream) libs.Audiostream {
 			libs.Wave(
 				libs.Stepwise(slimtriggerbassdrum2,[]float64{150,145}),
 				libs.Sinus),
-			enveloppebassdrum,
+			envelopebassdrum,
 			velocitybassdrum,
 			1.7), .5)
 
@@ -77,22 +77,22 @@ func pumKaTchaKa(tempo libs.Signalstream) libs.Audiostream {
 	triggerhihat	:= libs.DiracToImpulsion(drums[2],triggerwidth)
 	velocityhihat	 := drumsvelocity[2]
 	
-	enveloppehihat := libs.Adsr(triggerhihat,
+	envelopehihat := libs.Adsr(triggerhihat,
 					10*time.Millisecond, 60*time.Millisecond,
 					.1, 100*time.Millisecond)
 	hihat := libs.Vca(libs.Wave(libs.Constant(consttrigger1, 1.), libs.Noise),
-					  enveloppehihat,
+					  envelopehihat,
 					  velocityhihat,
 					  .3)
 
 	// snare
 	triggersnare	:= libs.DiracToImpulsion(drums[1],triggerwidth)
 	velocitysnare	 := drumsvelocity[1]			  
-	enveloppesnare := libs.Adsr(triggersnare,
+	envelopesnare := libs.Adsr(triggersnare,
 						10*time.Millisecond, 40*time.Millisecond,
 						.1, 40*time.Millisecond)
 	snare := libs.Vca(libs.Wave(libs.Constant(consttrigger2, 700.), libs.Square),
-					  enveloppesnare,
+					  envelopesnare,
 					  velocitysnare,
 				      .2)
 
